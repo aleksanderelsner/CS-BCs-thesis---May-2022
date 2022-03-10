@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/buttonSettingsClose"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:background="@drawable/ic_baseline_clear_24"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:text="Settings" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:text="Change your nickname" />
+
+    <EditText
+        android:id="@+id/editTextSettingsUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:hint="Enter your name" />
+
+    <Button
+        android:id="@+id/buttonSettingsUsernameConfirm"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Confirm" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Change the name of your pet"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editTextSettingsPetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:hint="Enter pet name" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/buttonSettingsPetNameConfirm"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Confirm" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:text="Reset progress of the game" />
+
+    <Button
+        android:id="@+id/buttonSettingsReset"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="Reset" />
+</LinearLayout>

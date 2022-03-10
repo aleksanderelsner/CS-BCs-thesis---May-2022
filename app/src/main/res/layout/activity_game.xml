@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+    <Button
+        android:id="@+id/buttonGameShop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewGameMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Money: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewGameDays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Days:"
+        app:layout_constraintStart_toEndOf="@+id/textViewGameMoney"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonGameStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Statistics"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewGameRoomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="180dp"
+        android:text="Room"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGameShop" />
+
+    <TextView
+        android:id="@+id/textViewPetName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:text="Name:"
+        app:layout_constraintEnd_toStartOf="@+id/textViewPetType"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewPetType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Dog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRoomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="180dp"
+        android:text="Room:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:elevation="2dp"
+        android:id="@+id/frameLayout1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_launcher_foreground"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+        <TextView
+            android:id="@+id/button1Text"
+            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:clickable="false"
+            android:text="Activity 2"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGameShop"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_launcher_foreground"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+        <TextView
+            android:id="@+id/button2Text"
+            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:textAlignment="center"
+            android:clickable="false"
+            android:text="Activity 1"/>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageViewRoom"
+        android:layout_width="0dp"
+        android:layout_height="430dp"
+        android:layout_margin="0dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRoomName"
+        app:srcCompat="@drawable/bedroom" />
+
+    <ImageView
+        android:id="@+id/cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="184dp"
+        android:elevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPetName"
+        app:srcCompat="@drawable/cat_01" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

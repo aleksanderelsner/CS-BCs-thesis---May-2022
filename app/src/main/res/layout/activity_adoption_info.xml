@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context=".AdoptionInfoActivity">
+
+    <Button
+        android:id="@+id/buttonC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Prepare for the 1st day"
+        app:layout_constraintTop_toBottomOf="@+id/buttonB"
+        tools:layout_editor_absoluteX="204dp" />
+
+    <Button
+        android:id="@+id/buttonA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="How to adopt"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        tools:layout_editor_absoluteX="34dp" />
+
+    <Button
+        android:id="@+id/buttonD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Benefits of Adoption"
+        app:layout_constraintTop_toBottomOf="@+id/buttonC"
+        tools:layout_editor_absoluteX="124dp" />
+
+    <Button
+        android:id="@+id/buttonB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Get your pet used to new home"
+        app:layout_constraintTop_toBottomOf="@+id/buttonA"
+        tools:layout_editor_absoluteX="141dp" />
+
+    <Button
+        android:id="@+id/buttonAdoptionInfoClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="160dp"
+        android:text="Return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonD" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="160dp"
+        android:text="Adoption Information"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

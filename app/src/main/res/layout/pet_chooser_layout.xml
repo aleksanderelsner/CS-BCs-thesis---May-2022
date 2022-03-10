@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please choose the type of your pet" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupPet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipDog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dog"
+            android:checkable="true"
+            app:checkedIcon="@drawable/ic_baseline_check_24"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipCat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cat"
+            android:checkable="true"
+            app:checkedIcon="@drawable/ic_baseline_check_24"/>
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please choose the name of your pet" />
+
+    <EditText
+        android:id="@+id/editTextInitPetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Pet name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/buttonPetInitConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm" />
+
+</LinearLayout>
