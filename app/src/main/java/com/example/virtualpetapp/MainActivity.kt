@@ -80,6 +80,8 @@ class MainActivity : AppCompatActivity() {
         }
         buttonReset.setOnClickListener {
             sharedPref.edit().putString("petname","default").commit()
+            deleteFile("progress")
+            deleteFile("inventory")
         }
         buttonConfirmUsername.setOnClickListener {
             val toast = Toast.makeText(this,"Please input your name first", Toast.LENGTH_SHORT)

@@ -3,8 +3,6 @@ package com.example.virtualpetapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper.loop
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -15,12 +13,12 @@ import com.example.virtualpetapp.model.*
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.*
-import org.w3c.dom.Text
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.lang.Runnable
 import java.time.LocalDate
 import java.util.*
+import kotlin.math.abs
 
 class GameActivity : AppCompatActivity(){
     companion object{
@@ -32,24 +30,29 @@ class GameActivity : AppCompatActivity(){
     private var roomPointer: Int = 0
     private var isCatAnimated: Boolean = true
     private var isLitterBoxFull = false
+    private val SHARED_PREF: String = "SharedPreferences"
+    private val SHARED_PREF_PET_NAME: String = "petname"
+    private val SHARED_PREF_DEFAULT: String = "default"
+    val FILE_PET = "progress"
+    val FILE_INVENTORY = "inventory"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        val sharedPref = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
         val gameMoneyText = findViewById<TextView>(R.id.textViewGameMoney)
         val gameDaysText = findViewById<TextView>(R.id.textViewGameDays)
         val gamePetNameText = findViewById<TextView>(R.id.textViewPetName)
         val gamePetTypeText = findViewById<TextView>(R.id.textViewPetType)
 
         //check if pet was initialised if not show pet initialisation screen
-        if (sharedPref.getString("petname", "default") == "default") {
+        if (sharedPref.getString(SHARED_PREF_PET_NAME, SHARED_PREF_DEFAULT) == SHARED_PREF_DEFAULT) {
             showPetInit()
         }else{//initialise containers on the screen with pet data
-            var fileInput = applicationContext.openFileInput("progress")
+            var fileInput = applicationContext.openFileInput(FILE_PET)
             var objectInputStream = ObjectInputStream(fileInput)
             pet = objectInputStream.readObject() as Pet
-            fileInput = applicationContext.openFileInput("inventory")
+            fileInput = applicationContext.openFileInput(FILE_INVENTORY)
             objectInputStream = ObjectInputStream(fileInput)
             inventory = objectInputStream.readObject() as Inventory
             fileInput.close()
@@ -90,11 +93,11 @@ class GameActivity : AppCompatActivity(){
                 val x2 = e2!!.x
                 val cat = findViewById<ImageView>(R.id.cat)
                 if (isCatAnimated) {
-                    if (x1 - x2 > minDistance && Math.abs(velocityX) > minVelocity) {
+                    if (x1 - x2 > minDistance && abs(velocityX) > minVelocity) {
                         if (roomPointer == roomList.size - 1) roomPointer = 0
                         else roomPointer += 1
                         //move view 1000f to the left and make it transparent, then when it ends
-                        cat.animate().alpha(0f).start()
+                        cat.animate().alpha(0f).setDuration(100).start()
                         imageView.animate().translationX(imageView.x - 1000f).alpha(0f)
                             .setDuration(400).withEndAction(
                                 //change room name and image, move view 2000f to the right, then when it ends
@@ -112,7 +115,7 @@ class GameActivity : AppCompatActivity(){
                                                 cat.animate().alpha(1f).start()
                                             }).start()
                                 }).start()
-                    } else if (x2 - x1 > minDistance && Math.abs(velocityX) > minVelocity) {
+                    } else if (x2 - x1 > minDistance && abs(velocityX) > minVelocity) {
                         if (roomPointer == 0) roomPointer = roomList.size - 1
                         else roomPointer -= 1
                         //move view 1000f to the right and make it transparent, then when it ends
@@ -139,7 +142,7 @@ class GameActivity : AppCompatActivity(){
                 return true
             }
         })
-        imageView.setOnTouchListener { v, event ->
+        imageView.setOnTouchListener { _, event ->
             detector.onTouchEvent(event)
             return@setOnTouchListener true
         }
@@ -148,10 +151,10 @@ class GameActivity : AppCompatActivity(){
     }
     override fun onBackPressed() {
         super.onBackPressed()
-        var fileOutput = applicationContext.openFileOutput("progress",Context.MODE_PRIVATE)
+        var fileOutput = applicationContext.openFileOutput(FILE_PET,Context.MODE_PRIVATE)
         var objectOutputStream = ObjectOutputStream(fileOutput)
         objectOutputStream.writeObject(pet)
-        fileOutput = applicationContext.openFileOutput("inventory",Context.MODE_PRIVATE)
+        fileOutput = applicationContext.openFileOutput(FILE_INVENTORY,Context.MODE_PRIVATE)
         objectOutputStream = ObjectOutputStream(fileOutput)
         objectOutputStream.writeObject(inventory)
         objectOutputStream.close()
@@ -160,10 +163,10 @@ class GameActivity : AppCompatActivity(){
     }
 
     override fun onStop() {
-        var fileOutput = applicationContext.openFileOutput("progress",Context.MODE_PRIVATE)
+        var fileOutput = applicationContext.openFileOutput(FILE_PET,Context.MODE_PRIVATE)
         var objectOutputStream = ObjectOutputStream(fileOutput)
         objectOutputStream.writeObject(pet)
-        fileOutput = applicationContext.openFileOutput("inventory",Context.MODE_PRIVATE)
+        fileOutput = applicationContext.openFileOutput(FILE_INVENTORY,Context.MODE_PRIVATE)
         objectOutputStream = ObjectOutputStream(fileOutput)
         objectOutputStream.writeObject(inventory)
         objectOutputStream.close()
@@ -259,10 +262,10 @@ class GameActivity : AppCompatActivity(){
         }
     }
     private fun changeRoomName(s: String){
-        findViewById<TextView>(R.id.textViewRoomName).text = "Room: " + s
+        findViewById<TextView>(R.id.textViewRoomName).text = "Room: $s"
     }
     private fun shop(){
-        val sharedPref = getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
         sharedPref.edit().putInt("money",pet.money).apply()
         sharedPref.edit().putInt("item1",inventory.foodItem1).apply()
         sharedPref.edit().putInt("item2",inventory.foodItem2).apply()
@@ -296,7 +299,7 @@ class GameActivity : AppCompatActivity(){
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     if(tab!=null){
-                        if(tab.text.toString().toLowerCase().equals("food"))
+                        if(tab.text.toString().toLowerCase() == "food")
                             recyclerView.adapter = RecyclerViewAdapter(foodItems,applicationContext)
                         else
                             recyclerView.adapter = RecyclerViewAdapter(cosmItems,applicationContext)
@@ -333,12 +336,31 @@ class GameActivity : AppCompatActivity(){
             popupWindow.showAsDropDown(findViewById(R.id.buttonGameStatistics),0,0,Gravity.TOP)
         }
     }
-    private fun updateStatistics(){
-        CoroutineScope(Dispatchers.Main.immediate).launch {
-            while(true) {
-                if(pet.hunger!=0f){
-                delay(86400)
-                pet.hunger -= 0.01f
+    private fun updateStatistics() {
+        val sharedPref = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+        if (sharedPref.getString(
+                SHARED_PREF_PET_NAME,
+                SHARED_PREF_DEFAULT
+            ) != SHARED_PREF_DEFAULT
+        ) {
+            CoroutineScope(Dispatchers.Main.immediate).launch {
+                while (true) {
+                    if(pet.energy>0f)pet.energy -=0.01f
+                    if(pet.bladder>0f) pet.bladder -=0.01f
+                    if(pet.hunger>0f) pet.hunger -= 0.01f
+                    if(pet.hygiene>0f)pet.hygiene -=0.01f
+                    if(pet.loneliness>0f)pet.loneliness -=0.01f
+                    delay(40000)
+                    if(pet.hunger>0f) pet.hunger -= 0.02f
+                    delay(10000)
+                    if(pet.hygiene>0f)pet.hygiene -=0.01f
+                    delay(10000)
+                    if(pet.energy>0f)pet.energy -=0.01f
+                    delay(10000)
+                    if(pet.loneliness>0f)pet.loneliness -=0.01f
+                    delay(10000)
+                    if(pet.loneliness>0f)pet.bladder -=0.02f
+                    delay(10000)
                 }
             }
         }
@@ -385,7 +407,7 @@ class GameActivity : AppCompatActivity(){
     }
     private fun toilet(){
     if(inventory.cosmeticItem2>0) {
-
+        //todo
     }else{
         Toast.makeText(applicationContext, "You don't have enough of this item", Toast.LENGTH_SHORT).show()
     }
@@ -397,9 +419,9 @@ class GameActivity : AppCompatActivity(){
         val dialog = dialogBuilder.create()
         val buttonCancel = popupView.findViewById<ImageButton>(R.id.feedButtonClose)
         val smallFoodQty = popupView.findViewById<TextView>(R.id.Food2Count)
-        val bigFooodQty = popupView.findViewById<TextView>(R.id.Food1Count)
+        val bigFoodQty = popupView.findViewById<TextView>(R.id.Food1Count)
         smallFoodQty.text = "Quantity: ${inventory.foodItem1}"
-        bigFooodQty.text = "Quantity: ${inventory.foodItem2}"
+        bigFoodQty.text = "Quantity: ${inventory.foodItem2}"
         dialog.setCancelable(false)
         dialog.show()
         buttonCancel.setOnClickListener {
@@ -439,7 +461,7 @@ class GameActivity : AppCompatActivity(){
                     toast.setText("Choose pet type")
                     toast.show()
                 }
-                petname.equals("") -> {
+                petname == "" -> {
                     toast.setText("Choose pet name")
                     toast.show()
                 }
