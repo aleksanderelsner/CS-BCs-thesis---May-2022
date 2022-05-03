@@ -53,7 +53,7 @@
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Change the name of your pet"
+        android:text="Change the name of your cat"
         android:textAlignment="center"
         android:textSize="20sp" />
 
@@ -64,7 +64,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:hint="Enter pet name" />
+        android:hint="Enter cat name" />
 
     <TextView
         android:id="@+id/textView7"
